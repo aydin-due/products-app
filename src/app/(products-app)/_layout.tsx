@@ -13,6 +13,7 @@ const CheckAuthLayout = () => {
         checkStatus()
     }, [])
 
+
     if (status === 'checking') {
         return <View
             style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginBottom: 5 }}>
@@ -38,6 +39,10 @@ const CheckAuthLayout = () => {
         <Stack.Screen
             name='(home)/index'
             options={{ title: 'products', headerLeft: () => <LogoutButton /> }}
+        />
+        <Stack.Screen
+            name='product/[id]'
+            options={{ title: 'producto' }}
         />
     </Stack>
 

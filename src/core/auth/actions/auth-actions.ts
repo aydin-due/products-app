@@ -1,4 +1,4 @@
-import { productsApi } from "../api/products-api"
+import { productsApi } from "../../api/products-api"
 import { User } from "../interfaces/user"
 
 export interface AuthResponse {

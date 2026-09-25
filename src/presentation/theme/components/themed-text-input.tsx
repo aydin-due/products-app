@@ -1,14 +1,15 @@
 import { IoniconsName } from '@/constants/types'
 import { Ionicons } from '@react-native-vector-icons/ionicons'
 import { useRef, useState } from 'react'
-import { StyleSheet, TextInput, TextInputProps, View } from 'react-native'
+import { StyleProp, StyleSheet, TextInput, TextInputProps, View, ViewStyle } from 'react-native'
 import { useTheme } from '../hooks/use-theme'
 
 interface Props extends TextInputProps {
     icon?: IoniconsName
+    containerstyle?: StyleProp<ViewStyle>
 }
 
-const ThemedTextInput = ({ icon, ...rest }: Props) => {
+const ThemedTextInput = ({ icon, containerstyle, ...rest }: Props) => {
     const primaryColor = useTheme().primary
     const textColor = useTheme().text
 
@@ -17,7 +18,7 @@ const ThemedTextInput = ({ icon, ...rest }: Props) => {
 
     return (
         <View
-            style={{ ...styles.border, borderColor: isActive ? primaryColor : '#ccc' }}
+            style={[{ ...styles.border, borderColor: isActive ? primaryColor : '#ccc' }, containerstyle]}
             onTouchStart={() => inputRef.current?.focus()}
         >
             {icon && <Ionicons
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
     border: {
         borderWidth: 1,
         borderRadius: 5,
-        padding: 5,
+        padding: 10,
         marginBottom: 10,
         flexDirection: 'row',
         alignItems: 'center'

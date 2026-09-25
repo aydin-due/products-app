@@ -1,0 +1,57 @@
+import { useTheme } from '@/presentation/theme/hooks/use-theme'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+
+interface Props {
+    options: string[]
+    selectedOptions: string[]
+    onSelect: (option: string) => void
+}
+
+const ThemedButtonGroup = ({ options, selectedOptions, onSelect }: Props) => {
+    const primaryColor = useTheme().primary
+    return (
+        <View style={styles.container}>
+            {
+                options.map(option => (
+                    <TouchableOpacity
+                        onPress={() => onSelect(option)}
+                        key={option}
+                        style={[styles.button, selectedOptions.includes(option) && { backgroundColor: primaryColor }]}
+                    >
+                        <Text
+                            numberOfLines={1}
+                            adjustsFontSizeToFit
+                            style={[styles.buttonText, selectedOptions.includes(option) && styles.selectedButtonText]}>
+                            {option[0].toUpperCase() + option.slice(1)}
+                        </Text>
+                    </TouchableOpacity>
+                ))
+            }
+        </View >
+    )
+}
+
+export default ThemedButtonGroup
+
+const styles = StyleSheet.create({
+    container: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1
+    },
+    button: {
+        padding: 10,
+        margin: 5,
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1
+    },
+    buttonText: {
+        fontSize: 16
+    },
+    selectedButtonText: {
+        color: 'white'
+    }
+})

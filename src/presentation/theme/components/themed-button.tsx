@@ -9,15 +9,17 @@ interface Props extends PressableProps {
     children: string
 }
 
-const ThemedButton = ({ children, icon, ...rest }: Props) => {
+const ThemedButton = ({ children, icon, style, ...rest }: Props) => {
     const primaryColor = useTheme().primary
 
     return (
         <Pressable
-            style={({ pressed }) => [{
-                ...styles.btn,
-                backgroundColor: pressed ? primaryColor + '90' : primaryColor,
-            }]}
+            style={(state) => [
+                styles.btn,
+                { backgroundColor: state.pressed ? primaryColor + '90' : primaryColor },
+                // Resolve incoming style if it's a function (Pressable style callback), object, or array
+                typeof style === 'function' ? style(state) : style,
+            ]}
             {...rest}
 
         >
